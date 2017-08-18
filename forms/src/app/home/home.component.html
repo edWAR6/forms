@@ -1,0 +1,27 @@
+<div class="content">
+  <md-card class="signin-card">
+    <md-card-header>
+      <div md-card-avatar class="header-image"></div>
+      <md-card-title>Hello {{user.displayName}}.</md-card-title>
+      <md-card-subtitle>These are your locations. Please be aware that as the AI capabilities are increased, more data will be needed.</md-card-subtitle>
+    </md-card-header>
+    <img md-card-image src="assets/header_small.svg">
+    <md-card-content>
+      {{(locations$ | async)?.length}}
+      <p *ngIf="(locations$ | async)?.length==0">
+        Add a new location.
+      </p>
+      <md-nav-list>
+        <md-list-item *ngFor="let location of locations | async" routerLink="/locations/{{location.$key}}">
+          <h3 md-line>{{ location.name }}</h3>
+          <p md-line>{{location.address}}</p>
+          <md-icon>edit</md-icon>
+        </md-list-item>
+      </md-nav-list>
+    </md-card-content>
+    <md-card-actions>
+      <span class="fill"></span>
+      <button md-raised-button (click)="save()">SUBMIT</button>
+    </md-card-actions>
+  </md-card>
+</div>

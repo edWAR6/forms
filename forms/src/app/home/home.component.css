@@ -1,0 +1,23 @@
+.content{
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  padding-top: 100px;
+}
+
+md-card{
+  margin: 10px auto;
+}
+.signin-card{
+  max-width: 800px;
+}
+
+md-card-actions{
+  display: flex;
+}
+
+.header-image{
+  background-image: url('../../assets/logo.png');
+  background-size: cover;
+}

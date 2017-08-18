@@ -1,0 +1,102 @@
+<div class="content">
+  <div class="login">
+    <md-card class="login-card">
+      <md-card-header>
+        <md-card-title>Register a new commerce account</md-card-title>
+        <md-card-subtitle>Create a new administrator user account and manage your commerce.</md-card-subtitle>
+      </md-card-header>
+      <img md-card-image src="assets/header.svg">
+      <form [formGroup]="registrationGroup" (ngSubmit)="registerWithEmailAndPassword(registrationGroup.valid)">
+        <md-card-content>
+          <md-input-container>
+            <input type="email" name="email" mdInput placeholder="Email" [formGroup]="registrationGroup" formControlName="emailControl" [(ngModel)]="registration.email">
+            <md-error *ngIf="registrationGroup.controls.emailControl.hasError('pattern')">
+              Please enter a valid email address
+            </md-error>
+            <md-error *ngIf="registrationGroup.controls.emailControl.hasError('required')">
+              Email is <strong>required</strong>
+            </md-error>
+          </md-input-container>
+          <md-input-container>
+            <input type="password" name="password" mdInput placeholder="Password" [formGroup]="registrationGroup" formControlName="passwordControl" [(ngModel)]="registration.password">
+            <md-error *ngIf="registrationGroup.controls.passwordControl.hasError('required')">
+              Password is <strong>required</strong>
+            </md-error>
+            <md-error *ngIf="registrationGroup.controls.passwordControl.hasError('minlength')">
+              Password must be at least 6 characters long
+            </md-error>
+          </md-input-container>
+          <md-input-container>
+            <input type="password" name="confirmPassword" mdInput placeholder="Confirm password" [formGroup]="registrationGroup" formControlName="confirmPasswordControl">
+            <md-error *ngIf="registrationGroup.controls.confirmPasswordControl.hasError('required')">
+              Password confirmation is <strong>required</strong>
+            </md-error>
+            <md-error *ngIf="registrationGroup.controls.confirmPasswordControl.hasError('differentPassword')">
+              The password confirmation must <strong>match</strong> the password
+            </md-error>
+          </md-input-container>
+        </md-card-content>
+        <md-card-actions >
+          <span class="fill"></span>
+          <button type="submit" md-raised-button>REGISTER</button>
+        </md-card-actions>
+      </form>
+      <md-card-content class="social">
+        <button class="loginBtn loginBtn--google" md-button (click)="loginWithGoogle()">Register with Google</button>
+        <button class="loginBtn loginBtn--facebook" md-button (click)="loginWithFacebook()">Register with Facebook</button>
+      </md-card-content>
+    </md-card>
+
+    <md-card class="login-card">
+      <md-card-header>
+        <md-card-title>Sign in to your existing commerce account</md-card-title>
+        <md-card-subtitle>Use your existing account to manage your commerce.</md-card-subtitle>
+      </md-card-header>
+      <img md-card-image src="assets/header.svg">
+      <form [formGroup]="signinGroup" (ngSubmit)="signinWithEmailAndPassword(signinGroup.valid)">
+        <md-card-content>
+          <md-input-container>
+            <input type="email" mdInput placeholder="Email" [formGroup]="signinGroup" formControlName="emailControl" [(ngModel)]="signin.email">
+            <md-error *ngIf="signinGroup.controls.emailControl.hasError('pattern')">
+              Please enter a valid email address
+            </md-error>
+            <md-error *ngIf="signinGroup.controls.emailControl.hasError('required')">
+              Email is <strong>required</strong>
+            </md-error>
+          </md-input-container>
+          <md-input-container>
+            <input type="password" mdInput placeholder="Password" [formGroup]="signinGroup" formControlName="passwordControl" [(ngModel)]="signin.password">
+            <md-error *ngIf="signinGroup.controls.passwordControl.hasError('required')">
+              Password is <strong>required</strong>
+            </md-error>
+            <md-error *ngIf="signinGroup.controls.passwordControl.hasError('minlength')">
+              Password must be at least 6 characters long
+            </md-error>
+          </md-input-container>
+        </md-card-content>
+        <md-card-actions >
+          <span class="fill"></span>
+          <button type="submit" md-raised-button>SIGN IN</button>
+        </md-card-actions>
+      </form>
+      <md-card-content class="social">
+        <button class="loginBtn loginBtn--google" md-button (click)="loginWithGoogle()">Sign in with Google</button>
+        <button class="loginBtn loginBtn--facebook" md-button (click)="loginWithFacebook()">Sign in with Facebook</button>
+      </md-card-content>
+    </md-card>
+  </div>
+
+  <!-- <agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="17"
+    [mapDraggable]="false"
+    [scrollwheel]="false"
+    [streetViewControl]="false"
+    [zoomControl]="false"
+    [clickableIcons]="false"
+    [disableDoubleClickZoom]= "true"
+    [styles]="style">
+  </agm-map> -->
+
+</div>
