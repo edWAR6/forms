@@ -12,8 +12,7 @@
         To start adding locations, click the add button.
       </p>
       <md-nav-list>
-        <md-list-item *ngFor="let location of locations | async" >
-          <!-- routerLink="/location/{{location.$key}}" -->
+        <md-list-item *ngFor="let location of locations | async" routerLink="/location/{{location.$key}}">
           <h3 md-line>{{ location.name }}</h3>
           <p md-line>{{location.address}}</p>
           <md-icon>edit</md-icon>

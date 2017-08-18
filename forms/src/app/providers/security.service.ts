@@ -21,7 +21,7 @@ export class SecurityService implements CanActivate {
     });
   }
 
-  canActivate(): boolean{    
+  canActivate(): boolean{
     if (this.user) {
      return true;
     }else{
@@ -31,19 +31,27 @@ export class SecurityService implements CanActivate {
   }
 
   registerWithEmailAndPassword(email, password){
-    return this.$angularFireAuth.auth.createUserWithEmailAndPassword(email, password);
+    return this.$angularFireAuth.auth.createUserWithEmailAndPassword(email, password).then(user => {
+      this.user = user;
+    });
   }
 
   signinWithEmailAndPassword(email, password){
-    return this.$angularFireAuth.auth.signInWithEmailAndPassword(email, password);
+    return this.$angularFireAuth.auth.signInWithEmailAndPassword(email, password).then(user => {
+      this.user = user;
+    });
   }
 
   loginWithGoogle() {
-    return this.$angularFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    return this.$angularFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(user => {
+      this.user = user;
+    });
   }
 
   loginWithFacebook() {
-    return this.$angularFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    return this.$angularFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider()).then(user => {
+      this.user = user;
+    });
   }
 
   logout() {

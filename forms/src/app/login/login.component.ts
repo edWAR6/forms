@@ -201,14 +201,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.$security.authState.subscribe(user => {
+      if (user) {
+        this.router.navigate(['/locations']);
+      }
+    });
   }
 
   registerWithEmailAndPassword(valid){
     if (valid){
-      this.$security.registerWithEmailAndPassword(this.registration.email, this.registration.password).then((user) => {
-        // this.router.navigateByUrl('/locations');
-        this.router.navigate(['/locations']);
-      }).catch((error) => {
+      this.$security.registerWithEmailAndPassword(this.registration.email, this.registration.password).catch((error) => {
         console.error('Registration failed', error);
         this.snackBar.open(error.message, '', { duration: 2000 });
       });
@@ -217,10 +219,7 @@ export class LoginComponent implements OnInit {
 
   signinWithEmailAndPassword(valid){
     if (valid){
-      this.$security.signinWithEmailAndPassword(this.signin.email, this.signin.password).then((user) => {
-        // this.router.navigateByUrl('/locations');
-        this.router.navigate(['/locations']);
-      }).catch((error) => {
+      this.$security.signinWithEmailAndPassword(this.signin.email, this.signin.password).catch((error) => {
         console.error('Login failed', error);
         this.snackBar.open(error.message, '', { duration: 2000 });
       });
@@ -228,10 +227,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle(){
-    this.$security.loginWithGoogle().then((user) => {
-      // this.router.navigateByUrl('/locations');
-      this.router.navigate(['/location']);
-    }).catch((error) => {
+    this.$security.loginWithGoogle().catch((error) => {
       console.error('Login failed', error);
       this.snackBar.open(error.message, '', { duration: 2000 });
     });
