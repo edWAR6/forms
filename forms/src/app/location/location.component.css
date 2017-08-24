@@ -21,3 +21,23 @@ md-card-actions{
   background-image: url('../../assets/logo.png');
   background-size: cover;
 }
+
+md-input-container, md-select{
+  width: 100%;
+}
+
+md-select{
+  margin-bottom: 10px;
+}
+
+md-divider{
+  margin: 50px 0;
+}
+
+button.card-fab{
+  bottom: -30px;
+}
+
+agm-map {
+  height: 300px;  
+}

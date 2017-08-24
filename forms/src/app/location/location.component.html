@@ -6,69 +6,131 @@
       <md-card-subtitle>All submitions will be manually reviewed.</md-card-subtitle>
     </md-card-header>
     <img md-card-image src="assets/header_small.svg">
-    <md-card-content>
-      <p>
-        Al ingresar este formulario, la información será revisada y personal de Q-Bot se pondrá en contacto con usted para hacerle llegar su usuario y contraseña.
-      </p>
-      <p>
-        Los datos ingresados serán tomados en cuenta sólo si existe un contrato activo entre el cliente y Q-Bot. Al existir dicho contrato, estos datos alimentarán las neuronas artificiales de Q-Bot.
-      </p>
-      <md-list>
-        <h3 md-subheader>Contact Information</h3>
-        <!-- <md-list-item>
+    <form [formGroup]="locationGroup" (ngSubmit)="save()">
+      <md-card-content>
+        <p>
+          New data will be considered, only if a valid contract exist between you and Q-Bot (Quepos Bot).
+          This data will be used to feed and train the AI module, so everyone can find your location, products and services.
+        </p>
+          <h3>Location Contact Information</h3>
           <md-input-container>
-            <input type="text" name="name" mdInput placeholder="Contact name" [(ngModel)]="location.contactName">
+            <input type="text" name="contactName" mdInput placeholder="Contact full name" [ngModel]="(location | async)?.contact?.name" formControlName="contactNameControl">
+            <md-error *ngIf="locationGroup.controls.contactNameControl.hasError('required')">
+              Contact name is <strong>required</strong>
+            </md-error>
           </md-input-container>
           <md-input-container>
-            <input type="email" name="email" mdInput placeholder="Contact email" [(ngModel)]="location.contactEmail">
+            <input type="email" name="contactEmail" mdInput placeholder="Contact email" [ngModel]="(location | async)?.contact?.email" formControlName="contactEmailControl">
+            <md-error *ngIf="locationGroup.controls.contactEmailControl.hasError('pattern')">
+              Please enter a valid email address
+            </md-error>
+            <md-error *ngIf="locationGroup.controls.contactEmailControl.hasError('required')">
+              Email is <strong>required</strong>
+            </md-error>
           </md-input-container>
           <md-input-container>
-            <input type="phone" name="phone" mdInput placeholder="Contact phone number" [(ngModel)]="location.contactPhone">
+            <input type="phone" name="contactPhone" mdInput placeholder="Contact phone number" [ngModel]="(location | async)?.contact?.phone" formControlName="contactPhoneControl">
+            <md-error *ngIf="locationGroup.controls.contactPhoneControl.hasError('required')">
+              Contact phone number is <strong>required</strong>
+            </md-error>
           </md-input-container>
           <md-input-container>
-            <input type="text" name="address" mdInput placeholder="Contact address" [(ngModel)]="location.contactAddress">
+            <input type="text" name="contactAddress" mdInput placeholder="Contact address" [ngModel]="(location | async)?.contact?.address" formControlName="contactAddressControl">
+            <md-error *ngIf="locationGroup.controls.contactAddressControl.hasError('required')">
+              Contact address is <strong>required</strong>
+            </md-error>
           </md-input-container>
-        </md-list-item>
-        <md-divider></md-divider>
-        <h3 md-subheader>Location Information</h3>
-        <md-list-item>
+          <md-divider></md-divider>
+
+          <h3>Location Information</h3>
           <md-input-container>
-            <input type="text" name="name" mdInput placeholder="Location name" [(ngModel)]="location.name">
+            <input type="text" name="name" mdInput placeholder="Location name" [ngModel]="(location | async)?.name" formControlName="nameControl">
+            <md-error *ngIf="locationGroup.controls.nameControl.hasError('required')">
+              Name is <strong>required</strong>
+            </md-error>
           </md-input-container>
-          <md-select placeholder="Category" [(ngModel)]="location.name" name="category">
-            <md-option *ngFor="let category of categories" [value]="category.value">
+          <p>Please provide a single line description to be used as tooltip on the map and a long description for the bot and customers to know more about products and services.</p>
+          <md-input-container>
+            <input type="text" name="shortDescription" mdInput placeholder="Location short description" [ngModel]="(location | async)?.shortDescription" formControlName="shortDescriptionControl">
+            <md-error *ngIf="locationGroup.controls.shortDescriptionControl.hasError('required')">
+              Short description is <strong>required</strong>
+            </md-error>
+          </md-input-container>
+          <md-input-container>
+            <input type="text" name="description" mdInput placeholder="Location long description" [ngModel]="(location | async)?.description" formControlName="descriptionControl">
+            <md-error *ngIf="locationGroup.controls.descriptionControl.hasError('required')">
+              Long description is <strong>required</strong>
+            </md-error>
+          </md-input-container>
+          <md-select placeholder="Category" name="category" [ngModel]="(location | async)?.category" formControlName="categoryControl">
+            <md-option *ngFor="let category of categories" [value]="category.id">
               {{category.name}}
             </md-option>
           </md-select>
           <md-input-container>
-            <input type="text" name="address" mdInput placeholder="Location address" [(ngModel)]="location.address">
+            <input type="email" name="email" mdInput placeholder="Location email" [ngModel]="(location | async)?.email" formControlName="emailControl">
+            <md-error *ngIf="locationGroup.controls.emailControl.hasError('pattern')">
+              Please enter a valid email address
+            </md-error>
           </md-input-container>
           <md-input-container>
-            <input type="phone" name="phone" mdInput placeholder="Location phone number" [(ngModel)]="location.phone">
-          </md-input-container>
-        </md-list-item>
-        <h3 md-subheader>External links</h3>
-        <md-list-item>
-          <md-input-container>
-            <input type="url" name="url" mdInput placeholder="Location website" [(ngModel)]="location.website">
+            <input type="phone" name="phone" mdInput placeholder="Location phone number" [ngModel]="(location | async)?.phone" formControlName="phoneControl">
+            <md-error *ngIf="locationGroup.controls.phoneControl.hasError('required')">
+              Phone is <strong>required</strong>
+            </md-error>
           </md-input-container>
           <md-input-container>
-            <input type="text" name="facebook" mdInput placeholder="Facebook url" [(ngModel)]="location.facebook">
+            <input type="text" name="address" mdInput placeholder="Location address" [ngModel]="(location | async)?.address" formControlName="addressControl">
+            <md-error *ngIf="locationGroup.controls.addressControl.hasError('required')">
+              Address is <strong>required</strong>
+            </md-error>
           </md-input-container>
-          <md-input-container>
-            <input type="text" name="twitter" mdInput placeholder="Twitter url" [(ngModel)]="location.twitter">
-          </md-input-container>
-          <md-input-container>
-            <input type="text" name="information" mdInput placeholder="Aditional information" [(ngModel)]="location.information">
-          </md-input-container>
-        </md-list-item> -->
-        <h3 md-subheader>Map location</h3>
+          <md-divider></md-divider>
 
-      </md-list>
-    </md-card-content>
-    <md-card-actions>
-      <span class="fill"></span>
-      <button md-raised-button (click)="save()">SUBMIT</button>
-    </md-card-actions>
+          <h3>External Links</h3>
+          <md-input-container>
+            <input type="url" name="website" mdInput placeholder="Location website" [ngModel]="(location | async)?.website" formControlName="websiteControl">
+            <md-error *ngIf="locationGroup.controls.websiteControl.hasError('pattern')">
+              Please enter a valid wbsite url
+            </md-error>
+          </md-input-container>
+          <md-input-container>
+            <input type="text" name="facebook" mdInput placeholder="Facebook url" [ngModel]="(location | async)?.facebook" formControlName="facebookControl">
+            <md-error *ngIf="locationGroup.controls.facebookControl.hasError('pattern')">
+              Please enter a valid facebook url
+            </md-error>
+          </md-input-container>
+          <md-input-container>
+            <input type="text" name="twitter" mdInput placeholder="Twitter url" [ngModel]="(location | async)?.twitter" formControlName="twitterControl">
+            <md-error *ngIf="locationGroup.controls.twitterControl.hasError('pattern')">
+              Please enter a valid twitter url
+            </md-error>
+          </md-input-container>
+          <md-input-container>
+            <input type="text" name="information" mdInput placeholder="Additional information" [ngModel]="(location | async)?.information" formControlName="informationControl">
+          </md-input-container>
+          <md-divider></md-divider>
+
+          <h3>Map Location</h3>
+          <p>Please choose the correct location by clicking the map.</p>
+          <agm-map
+            [latitude]="LAT"
+            [longitude]="LNG"
+            [zoom]="17"
+            [streetViewControl]="false"
+            [clickableIcons]="false"
+            (mapClick)="mapClicked($event.coords)">
+            <agm-marker
+              [latitude]="selectedLat"
+              [longitude]="selectedLng">
+            </agm-marker>
+          </agm-map>
+
+      </md-card-content>
+      <md-card-actions>
+        <span class="fill"></span>
+        <button type="submit" md-fab class="card-fab"><md-icon>save</md-icon></button>
+      </md-card-actions>
+    </form>
   </md-card>
 </div>

@@ -1,7 +1,7 @@
 <md-toolbar color="primary" class="mat-elevation-z4">
-  <h1>Q-Bot Commerce Administration</h1>
+  <h1 routerLink="/locations">Q-Bot Commerce Administration</h1>
   <span class="spacer"></span>
-  <span *ngIf="user">Hello {{user.name}} </span>
+  <span class="user" *ngIf="user">Hello {{user.name}} </span>
   <button md-button (click)="logout()" *ngIf="user">Logout</button>
 </md-toolbar>
 <router-outlet></router-outlet>

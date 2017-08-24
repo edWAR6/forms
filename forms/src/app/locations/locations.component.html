@@ -12,7 +12,7 @@
         To start adding locations, click the add button.
       </p>
       <md-nav-list>
-        <md-list-item *ngFor="let location of locations | async" routerLink="/location/{{location.$key}}">
+        <md-list-item *ngFor="let location of locations | async" [routerLink]="['/location', location.$key]">
           <h3 md-line>{{ location.name }}</h3>
           <p md-line>{{location.address}}</p>
           <md-icon>edit</md-icon>
@@ -21,7 +21,7 @@
     </md-card-content>
     <md-card-actions>
       <span class="fill"></span>
-      <button md-fab class="card-fab"><md-icon>add</md-icon></button>
+      <button md-fab class="card-fab" [routerLink]="['/location']"><md-icon>add</md-icon></button>
     </md-card-actions>
   </md-card>
 </div>

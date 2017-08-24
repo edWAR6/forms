@@ -7,3 +7,7 @@ md-toolbar{
 .spacer {
   flex: 1 1 auto;
 }
+
+.user{
+  margin: 0 10px;
+}

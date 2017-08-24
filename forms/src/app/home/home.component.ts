@@ -17,12 +17,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.$security.user;
-    this.locations = this.$location.getByUser(this.user.uid);
-  }
-
-  save(name){
-    console.log(1);
-    console.log(name);
+    // this.locations = this.$location.get(this.user.uid);
   }
 
 }

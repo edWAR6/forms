@@ -12,13 +12,13 @@ import { LocationService } from '../providers/location.service';
 })
 export class LocationsComponent implements OnInit {
   user: any;
-  locations: FirebaseListObservable<any>;
+  locations: FirebaseListObservable<any[]>;
 
   constructor(private $security: SecurityService, private $location: LocationService, private router: Router) { }
 
   ngOnInit() {
     this.user = this.$security.user;
-    this.locations = this.$location.getByUser(this.user.uid);
+    this.locations = this.$location.listByUser(this.user.uid);
   }
 
 }

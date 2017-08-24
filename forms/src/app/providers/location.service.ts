@@ -8,7 +8,7 @@ export class LocationService {
 
   constructor(private $firebase: AngularFireDatabase) { }
 
-  getByUser(key: string): FirebaseListObservable<any> {
+  listByUser(key: string): FirebaseListObservable<any[]> {
     return this.$firebase.list('/locations', {
       query: {
         orderByChild: 'user',
@@ -17,22 +17,18 @@ export class LocationService {
     });
   }
 
-  // bindToUser(key: string): void{
-  //   this.location = this.$firebase.object(`/locations/${key}`);
-  //   this.location.subscribe(location => {
-  //     if (location.hasOwnProperty('$value') && !location['$value']) {
-  //       location.set({timestamp: firebase.database['ServerValue']['TIMESTAMP']})
-  //     }
-  //   });
-  //
-  //   // this.$firebase.object(`/locations/${key}`).$ref.transaction(existing => {
-  //   //   if (existing) {
-  //   //     this.location = existing;
-  //   //   }else{
-  //   //     const locations = this.$firebase.list('/locations');
-  //   //     locations.push({ timestamp: 'HolA' });
-  //   //   }
-  //   // });
-  // }
+  get(key: string): FirebaseObjectObservable<any>{
+    return this.$firebase.object(`/locations/${key}`);
+  }
+
+  update(key: string, location: any){
+    const locations = this.$firebase.list('/locations');
+    return locations.update(key, location);
+  }
+
+  add(location){
+    const locations = this.$firebase.list('/locations');
+    return locations.push(location);
+  }
 
 }
